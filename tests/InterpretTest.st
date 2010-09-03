@@ -5,6 +5,7 @@ TestCase subclass: InterpretTest [
         | int lf th |
         th := Thunder new.
         th 
+	  function: #foo return: UInt;
 	  variable: #a type: UInt;
 	  variable: #b type: UInt;
 	  variable: #c type: UInt;
@@ -18,7 +19,7 @@ TestCase subclass: InterpretTest [
 	  or: #e with: 9 to: #d;
 	  rsh: #e with: 1 to: #e.
 
-	lf := IRInterpret on: th.
+	lf := IRInterpret on: th function.
 
 	self assert: (lf variableValue: #a) = 123.
 	self assert: (lf variableValue: #b) = 123.
@@ -32,12 +33,13 @@ TestCase subclass: InterpretTest [
         | int lf th |
         th := Thunder new.
         th
+	  function: #foo return: UInt;
           variable: #a type: UInt;
           mov: 120 to: #a;
           store: Char value: 123 to: 0;
           load: Char from: 0 to: #a.
 
-        lf := IRInterpret on: th.
+        lf := IRInterpret on: th function.
 
         self assert: (lf variableValue: #a) = 123.
     ]

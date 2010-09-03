@@ -5,6 +5,7 @@ TestCase subclass: LifeTimeIntervalTest [
         | int lf th |
         th := Thunder new.
         th 
+	  function: #foo return: UInt;
 	  variable: #a type: UInt;
 	  variable: #b type: UInt;
 	  variable: #c type: UInt;
@@ -17,7 +18,7 @@ TestCase subclass: LifeTimeIntervalTest [
 	  add: #c and: #b to: #d;
 	  mov: #e to: #d.
 
-	lf := LifeTimeInterval from: th.
+	lf := LifeTimeInterval from: th function.
 
 	{#a->(1@3). #b->(2@5). #c->(3@5). #d->(5@6). #e->(4@6)} do: [ :each |
 	    self assert: (lf intervals at: each key) from = each value x.

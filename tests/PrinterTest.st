@@ -6,10 +6,12 @@ TestCase subclass: PrinterTest [
         | string th |
         th := Thunder new.
         th 
+	    function: #foo return: UInt;
 	    variable: #a type: UInt;
 	    variable: #b type: Int.
 
-	string := (IRPrinter on: th) stream contents.
+	string := (IRPrinter on: th function) stream contents.
+
 	self assert: string =  'b Int
 a UInt
 '
@@ -21,11 +23,12 @@ a UInt
         | string th |
         th := Thunder new.
         th 
+	    function: #foo return: UInt;
             variable: #a type: UInt;
             variable: #b type: Int;
 	    mov: #a to: #b.
 
-        string := (IRPrinter on: th) stream contents.
+        string := (IRPrinter on: th function) stream contents.
         self assert: string =  'b Int
 a UInt
 mov #a to #b'
@@ -42,12 +45,13 @@ mov #a to #b'
 	    | i inst string th |
 	    th := Thunder new.
 	    th
+		function: #foo return: UInt;
 		variable: #a type: UInt;
 		variable: #b type: Int;
 		variable: #c type: Char;
 		perform: each with: #a with: #b with: #c.
 
-	    string := (IRPrinter on: th) stream contents.
+	    string := (IRPrinter on: th function) stream contents.
 
 	    i := 0.
 	    inst := String new.
@@ -67,12 +71,13 @@ a UInt
         | i inst string th |
         th := Thunder new.
         th
+	    function: #foo return: UInt;
             variable: #a type: UInt;
             variable: #b type: Int;
             variable: #c type: Char;
             load: UInt from: #a to: #c.
 
-        string := (IRPrinter on: th) stream contents.
+        string := (IRPrinter on: th function) stream contents.
         self assert: string =  ('c Char
 b Int
 a UInt
@@ -85,12 +90,13 @@ load UInt from #a to #c')
         | i inst string th |
         th := Thunder new.
         th
+	    function: #foo return: UInt;
             variable: #a type: UInt;
             variable: #b type: Int;
             variable: #c type: Char;
             store: UInt value: #a to: #c.
 
-        string := (IRPrinter on: th) stream contents.
+        string := (IRPrinter on: th function) stream contents.
         self assert: string =  ('c Char
 b Int
 a UInt

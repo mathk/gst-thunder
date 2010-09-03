@@ -1,125 +1,115 @@
 Object subclass: Thunder [
 
-    Thunder class >> new [
+    | function |
 
-	^ self basicNew
-		initialize;
-		yourself
+    function [
+
+	^ function
     ]
 
-    | instructions variables |
+    function: aSymbol return: aType [
 
-    initialize [
+	function := IRFunction function: aSymbol return: aType
+    ]
 
-	variables := Dictionary new.
-	instructions := OrderedCollection new
+    function: aSymbol parameters: anArray return: aType [
+
+	function := IRFunction function: aSymbol parameters: anArray return: aType
     ]
 
     variable: aSymbol type: aType [
 
-	variables at: aSymbol ifPresent: [ self error: 'Register ', aSymbol, ' is already in' ].
-	variables at: aSymbol put: (Variable named: aSymbol type: aType)
+	function variable: aSymbol type: aType
     ]
 
-    variableAt: aSymbol [
+    addInstruction: anInstruction [
 
-	^ self variableAt: aSymbol ifAbsent: [ self ]
-    ]
-
-    variableAt: aSymbol ifAbsent: aBlock [
-
-        ^ variables at: aSymbol ifAbsent: aBlock
-    ]
-
-    variables [
-	^ variables keys    
-    ]
-
-    instructions [
-
-	^ instructions
-    ]
-
-    instructionsDo: aOneArgBlock [
-
-	self instructions do: aOneArgBlock
+	function addInstruction: anInstruction
     ]
 
     mov: anObject to: aSymbol [
 
-	instructions add: (Mov from: anObject to: aSymbol)
+	self addInstruction: (Mov from: anObject to: aSymbol)
     ]
 
     add: anObject and: anObject2 to: aSymbol [
 
-	instructions add: (Add add: anObject and: anObject2 to: aSymbol)
+	self addInstruction: (Add add: anObject and: anObject2 to: aSymbol)
     ]
 
     sub: anObject minus: anObject2 to: aSymbol [
 
-	instructions add: (Sub sub: anObject minus: anObject2 to: aSymbol)
+	self addInstruction: (Sub sub: anObject minus: anObject2 to: aSymbol)
     ]
 
     mul: anObject by: anObject2 to: aSymbol [
 
-	instructions add: (Mul mul: anObject by: anObject2 to: aSymbol)
+	self addInstruction: (Mul mul: anObject by: anObject2 to: aSymbol)
     ]
 
     div: anObject by: anObject2 to: aSymbol [
 
-	instructions add: (Div div: anObject by: anObject2 to: aSymbol)
+	self addInstruction: (Div div: anObject by: anObject2 to: aSymbol)
     ]
 
     mod: anObject with: anObject2 to: aSymbol [
 
-	instructions add: (Mod mod: anObject with: anObject2 to: aSymbol)
+	self addInstruction: (Mod mod: anObject with: anObject2 to: aSymbol)
     ]
 
     and: anObject with: anObject2 to: aSymbol [
 
-	instructions add: (And and: anObject with: anObject2 to: aSymbol)
+	self addInstruction: (And and: anObject with: anObject2 to: aSymbol)
     ]
 
     or: anObject with: anObject2 to: aSymbol [
 
-        instructions add: (Or or: anObject with: anObject2 to: aSymbol)
+        self addInstruction: (Or or: anObject with: anObject2 to: aSymbol)
     ]
 
     xor: anObject with: anObject2 to: aSymbol [
 
-        instructions add: (Xor xor: anObject with: anObject2 to: aSymbol)
+        self addInstruction: (Xor xor: anObject with: anObject2 to: aSymbol)
     ]
 
     lsh: anObject with: anObject2 to: aSymbol [
     
-        instructions add: (Lsh lsh: anObject with: anObject2 to: aSymbol)
+        self addInstruction: (Lsh lsh: anObject with: anObject2 to: aSymbol)
     ]
 
     rsh: anObject with: anObject2 to: aSymbol [
     
-        instructions add: (Rsh rsh: anObject with: anObject2 to: aSymbol)
+        self addInstruction: (Rsh rsh: anObject with: anObject2 to: aSymbol)
     ]
 
     load: aType from: anObject to: aSymbol [
 
-        instructions add: (Load load: aType from: anObject to: aSymbol)
+        self addInstruction: (Load load: aType from: anObject to: aSymbol)
     ]
 
     store: aType value: anObject to: anObject2 [
 
-        instructions add: (Store store: aType value: anObject to: anObject2)
+        self addInstruction: (Store store: aType value: anObject to: anObject2)
     ]
 
     alloca: aType [
+
+        self addInstruction: (Alloca type: aType)
     ]
 
-    alloca: aType number: anInteger [
+    alloca: aType number: anObject [
+
+        self addInstruction: (Alloca type: aType number: anObject)
     ]
 
-    alloca: aType align: anInteger [
+    alloca: aType align: anObject [
+
+        self addInstruction: (Alloca type: aType align: anObject)
     ]
 
-    alloca: aType number: anInteger align: anInteger2 [
+    alloca: aType number: anObject align: anObject2 [
+
+        self addInstruction: (Alloca type: aType number: anObject align: anObject2)
     ]
 
     cCall: aSymbol with: anArray [
@@ -130,15 +120,7 @@ Object subclass: Thunder [
 
     ret [
 
-	instructions add: (Ret new) 
-    ]
-
-    accept: aVisitor [
-
-	variables do: [ :each |
-	    each accept: aVisitor ].
-	instructions do: [ :each |
-	    each accept: aVisitor ]
+	self addInstruction: (Ret new) 
     ]
 ]
 

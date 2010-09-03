@@ -37,6 +37,7 @@
   <filein>ULong.st</filein>
   <filein>Ptr.st</filein>
   <filein>Instruction.st</filein>
+  <filein>IRFunction.st</filein>
   <filein>Variable.st</filein>
   <filein>Mov.st</filein>
   <filein>Add.st</filein>
@@ -51,6 +52,7 @@
   <filein>Rsh.st</filein>
   <filein>Load.st</filein>
   <filein>Store.st</filein>
+  <filein>Alloca.st</filein>
   <filein>IRVisitor.st</filein>
   <filein>IRInterpret.st</filein>
   <filein>IRPrinter.st</filein>
@@ -70,6 +72,7 @@
   <file>ULong.st</file>
   <file>Ptr.st</file>
   <file>Instruction.st</file>
+  <file>IRFunction.st</file>
   <file>Variable.st</file>
   <file>Mov.st</file>
   <file>Add.st</file>
@@ -84,6 +87,7 @@
   <file>Rsh.st</file>
   <file>Load.st</file>
   <file>Store.st</file>
+  <file>Alloca.st</file>
   <file>IRVisitor.st</file>
   <file>IRInterpret.st</file>
   <file>IRPrinter.st</file>

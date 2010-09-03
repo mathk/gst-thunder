@@ -3,14 +3,18 @@ TestCase subclass: ThunderTest [
     testRegister [
 	<category: 'testing'>
 
-	| th |
+	| function th |
 	th := Thunder new.
-	th variable: #a type: UInt.
+	th 
+	  function: #foo return: UInt;
+	  variable: #a type: UInt.
 
-	self assert: (th variableAt: #a) type == UInt.
-	self assert: (th variableAt: #b) == th.
-	self assert: (th variableAt: #b ifAbsent: [ 123 ]) == 123.
-	self assert: (th variables) = #(#a) asSet.
+	function := th function.
+
+	self assert: (function variableAt: #a) type == UInt.
+	self assert: (function variableAt: #b) == function.
+	self assert: (function variableAt: #b ifAbsent: [ 123 ]) == 123.
+	self assert: (function variables) = #(#a) asSet.
     ]
 
     testMov [
@@ -18,7 +22,9 @@ TestCase subclass: ThunderTest [
 
 	| th |
 	th := Thunder new.
-	th variable: #a type: UInt.
+	th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
 	th mov: 123 to: #a
     ]
@@ -28,7 +34,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th add: 123 and: 234 to: #a
     ]
@@ -38,7 +46,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th sub: 123 minus: 234 to: #a
     ]
@@ -48,7 +58,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th div: 123 by: 2 to: #a
     ]
@@ -58,7 +70,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th mod: 123 with: 2 to: #a
     ]
@@ -68,7 +82,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th and: 123 with: 2 to: #a
     ]
@@ -78,7 +94,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th or: 123 with: 2 to: #a
     ]
@@ -88,7 +106,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th xor: 123 with: 2 to: #a
     ]
@@ -98,7 +118,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th lsh: 123 with: 2 to: #a
     ]
@@ -108,7 +130,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th rsh: 123 with: 2 to: #a
     ]
@@ -118,7 +142,9 @@ TestCase subclass: ThunderTest [
 
         | th |
         th := Thunder new.
-        th variable: #a type: UInt.
+        th
+	  function: #foo return: UInt; 
+	  variable: #a type: UInt.
 
         th load: UInt from: 16rABCDEF to: #a
     ]

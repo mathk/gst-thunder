@@ -6,6 +6,7 @@ TestCase subclass: LinearScanRegisterAllocTest [
         | int lf lsra th |
         th := Thunder new.
         th
+	  function: #foo return: UInt;
           variable: #a type: UInt;
           variable: #b type: UInt;
           variable: #c type: UInt;
@@ -18,7 +19,7 @@ TestCase subclass: LinearScanRegisterAllocTest [
           add: #c and: #b to: #d;
           mov: #e to: #d.
 
-        lf := LifeTimeInterval from: th.
+        lf := LifeTimeInterval from: th function.
 	lsra := LinearScanRegisterAllocation on: lf registers: 3.
     ]
 
