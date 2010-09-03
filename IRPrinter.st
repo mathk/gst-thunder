@@ -25,6 +25,18 @@ IRVisitor subclass: IRPrinter [
 	aProgram accept: self
     ]
 
+    visitFunction: aFunction [
+
+	| keywords |
+	keywords := aFunction name keywords.
+	keywords size = 1 ifTrue: [ stream nextPutAll: keywords first ].
+	aFunction argumentsDo: [ :each |
+	    stream
+		nextPutAll: keywords removeFirst, ' ', each name, ' ', each type name.
+	    keywords isEmpty ifFalse: [ stream nextPutAll: ' ' ] ].
+	stream nl
+    ]
+
     visitVariableDeclaration: aVariable [
 
         stream

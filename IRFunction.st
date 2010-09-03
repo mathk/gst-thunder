@@ -35,8 +35,10 @@ Instruction subclass: IRFunction [
     function: aSymbol parameters: anArray return: aType [
 
         name := aSymbol.
-        args := anArray.
-        return := aType
+        args := Dictionary new.
+        return := aType.
+	anArray do: [ :each |
+	    args at: each key put: (Variable named: each key type: each value) ]
     ]
 
     name [
@@ -47,6 +49,11 @@ Instruction subclass: IRFunction [
     arguments [
 
 	^ args
+    ]
+
+    argumentsDo: aOneArgBlock [
+
+        ^ self arguments do: aOneArgBlock
     ]
 
     return [
@@ -92,8 +99,7 @@ Instruction subclass: IRFunction [
 
     accept: aVisitor [
 
-        "aVisitor visitFunction: self"
-
+        aVisitor visitFunction: self.
         variables do: [ :each |
             each accept: aVisitor ].
         instructions do: [ :each |

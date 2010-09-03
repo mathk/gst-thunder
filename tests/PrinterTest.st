@@ -1,5 +1,22 @@
 TestCase subclass: PrinterTest [
 
+    testFunctionPrinter [
+        <category: 'testing'>
+
+        | string th |
+        th := Thunder new.
+        th
+            function: #'foo:bar:' parameters: {#nb->UInt. #size->UChar} return: UInt;
+            variable: #a type: UInt;
+            variable: #b type: Int.
+
+        string := (IRPrinter on: th function) stream contents.
+        self assert: string =  'foo: nb UInt bar: size UChar
+b Int
+a UInt
+'
+    ]
+
     testVarPrinter [
 	<category: 'testing'>
 
@@ -12,7 +29,8 @@ TestCase subclass: PrinterTest [
 
 	string := (IRPrinter on: th function) stream contents.
 
-	self assert: string =  'b Int
+	self assert: string =  'foo
+b Int
 a UInt
 '
     ]
@@ -29,7 +47,8 @@ a UInt
 	    mov: #a to: #b.
 
         string := (IRPrinter on: th function) stream contents.
-        self assert: string =  'b Int
+        self assert: string =  'foo
+b Int
 a UInt
 mov #a to #b'
     ]
@@ -59,7 +78,8 @@ mov #a to #b'
 		i := i + 1.
 		inst := inst, (sym copyFrom: 1 to: sym size - 1) asString, ' ', (#(#a #b #c) at: i) displayString.
 		i = 3 ifFalse: [ inst := inst, ' ' ] ].
-	    self assert: string =  ('c Char
+	    self assert: string =  ('foo
+c Char
 b Int
 a UInt
 ', inst) ]
@@ -78,7 +98,8 @@ a UInt
             load: UInt from: #a to: #c.
 
         string := (IRPrinter on: th function) stream contents.
-        self assert: string =  ('c Char
+        self assert: string =  ('foo
+c Char
 b Int
 a UInt
 load UInt from #a to #c')
@@ -97,7 +118,8 @@ load UInt from #a to #c')
             store: UInt value: #a to: #c.
 
         string := (IRPrinter on: th function) stream contents.
-        self assert: string =  ('c Char
+        self assert: string =  ('foo
+c Char
 b Int
 a UInt
 store UInt value #a to #c')

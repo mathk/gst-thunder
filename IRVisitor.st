@@ -12,6 +12,9 @@ Object subclass: IRVisitor [
 	aProgram accept: self
     ]
 
+    visitFunction: aFunction [
+    ]
+
     visitInteger: anInteger [
     ]
 
