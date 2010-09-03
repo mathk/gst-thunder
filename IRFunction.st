@@ -89,6 +89,11 @@ Instruction subclass: IRFunction [
         ^ variables at: aSymbol ifAbsent: aBlock
     ]
 
+    variablesDo: aOneArgBlock [
+
+	^ variables do: aOneArgBlock
+    ]
+
     instructions [
 
 	^ instructions
@@ -106,11 +111,7 @@ Instruction subclass: IRFunction [
 
     accept: aVisitor [
 
-        aVisitor visitFunction: self.
-        variables do: [ :each |
-            each accept: aVisitor ].
-        instructions do: [ :each |
-            each accept: aVisitor ]
+        aVisitor visitFunction: self
     ]
 ]
 

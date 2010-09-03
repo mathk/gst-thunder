@@ -1,0 +1,3 @@
+IRVisitor subclass: Lightning [
+]
+

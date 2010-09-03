@@ -29,16 +29,18 @@ IRVisitor subclass: IRPrinter [
 
 	| i keywords |
 	keywords := aFunction name keywords.
-	keywords size = 1 ifTrue: [ ^ stream
+	keywords size = 1 ifTrue: [ stream
 					nextPutAll: keywords first;
-					nl ].
+					nl.
+				    ^ super visitFunction: aFunction ].
 	i := 1.
 	keywords do: [ :each |
 	    stream
 		nextPutAll: each , ' ', (aFunction argumentAt: i) name, ' ', (aFunction argumentAt: i) type name.
 	    i := i + 1.
 	    i > keywords size ifFalse: [ stream nextPutAll: ' ' ] ].
-	stream nl
+	stream nl.
+	super visitFunction: aFunction
     ]
 
     visitVariableDeclaration: aVariable [

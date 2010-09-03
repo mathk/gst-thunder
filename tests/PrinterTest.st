@@ -28,7 +28,6 @@ a UInt
 	    variable: #b type: Int.
 
 	string := (IRPrinter on: th function) stream contents.
-
 	self assert: string =  'foo
 b Int
 a UInt

@@ -122,5 +122,10 @@ Object subclass: Thunder [
 
 	self addInstruction: (Ret new) 
     ]
+
+    ret: anObject [
+
+        self addInstruction: (Ret value: anObject)
+    ]
 ]
 

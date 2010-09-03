@@ -13,6 +13,11 @@ Object subclass: IRVisitor [
     ]
 
     visitFunction: aFunction [
+
+        aFunction variablesDo: [ :each |
+            each accept: self ].
+        aFunction instructionsDo: [ :each |
+            each accept: self ]
     ]
 
     visitInteger: anInteger [

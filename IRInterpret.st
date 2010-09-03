@@ -35,7 +35,8 @@ IRVisitor subclass: IRInterpret [
 	i := 0.
 	aFunction argumentDo: [ :each |
 	    i := i + 1.
-	    variables at: each name put: (argsValue at: i) ]
+	    variables at: each name put: (argsValue at: i) ].
+	super visitFunction: aFunction
     ]
 
     variableValue: aSymbol [

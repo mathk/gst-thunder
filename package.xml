@@ -8,12 +8,14 @@
     <filein>tests/LifeTimeIntervalTest.st</filein>
     <filein>tests/LinearScanRegisterAllocTest.st</filein>
     <filein>tests/InterpretTest.st</filein>
+    <filein>tests/CTranslatorTest.st</filein>
     <file>tests/ThunderTest.st</file>
     <file>tests/VariableTest.st</file>
     <file>tests/PrinterTest.st</file>
     <file>tests/LifeTimeIntervalTest.st</file>
     <file>tests/LinearScanRegisterAllocTest.st</file>
     <file>tests/InterpretTest.st</file>
+    <file>tests/CTranslatorTest.st</file>
     <sunit>
       GSTThunder.ThunderTest
       GSTThunder.VariableTest
@@ -21,6 +23,7 @@
       GSTThunder.LifeTimeIntervalTest
       GSTThunder.LinearScanRegisterAllocTest
       GSTThunder.InterpretTest
+      GSTThunder.CTranslatorTest
     </sunit>
   </test>
   <filein>Extends.st</filein>
