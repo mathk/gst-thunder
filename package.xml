@@ -58,6 +58,7 @@
   <filein>IRPrinter.st</filein>
   <filein>LifeTimeInterval.st</filein>
   <filein>LinearScanRegisterAlloc.st</filein>
+  <filein>tr/c.st</filein>
   <file>Extends.st</file>
   <file>Interval.st</file>
   <file>Thunder.st</file>
@@ -93,4 +94,5 @@
   <file>IRPrinter.st</file>
   <file>LifeTimeInterval.st</file>
   <file>LinearScanRegisterAlloc.st</file>
+  <file>tr/c.st</file>
 </package>

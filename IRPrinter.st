@@ -27,13 +27,17 @@ IRVisitor subclass: IRPrinter [
 
     visitFunction: aFunction [
 
-	| keywords |
+	| i keywords |
 	keywords := aFunction name keywords.
-	keywords size = 1 ifTrue: [ stream nextPutAll: keywords first ].
-	aFunction argumentsDo: [ :each |
+	keywords size = 1 ifTrue: [ ^ stream
+					nextPutAll: keywords first;
+					nl ].
+	i := 1.
+	keywords do: [ :each |
 	    stream
-		nextPutAll: keywords removeFirst, ' ', each name, ' ', each type name.
-	    keywords isEmpty ifFalse: [ stream nextPutAll: ' ' ] ].
+		nextPutAll: each , ' ', (aFunction argumentAt: i) name, ' ', (aFunction argumentAt: i) type name.
+	    i := i + 1.
+	    i > keywords size ifFalse: [ stream nextPutAll: ' ' ] ].
 	stream nl
     ]
 

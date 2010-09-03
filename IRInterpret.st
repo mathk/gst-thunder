@@ -1,5 +1,13 @@
 IRVisitor subclass: IRInterpret [
 
+    IRInterpret class >> on: aProgram with: anArray [
+
+        ^ self new
+	    argumentsValue: anArray;
+            visitProgram: aProgram;
+            yourself
+    ]
+
     IRInterpret class >> new [
 	<category: 'instance creation'>
 
@@ -8,12 +16,26 @@ IRVisitor subclass: IRInterpret [
 		    yourself
     ]
 
-    | memory variables |
+    | argsValue memory variables |
 
     initialize [
 
 	memory := Array new: 1000000.
 	variables := Dictionary new
+    ]
+
+    argumentsValue: anArray [
+
+	argsValue := anArray
+    ]
+
+    visitFunction: aFunction [
+
+	| i |
+	i := 0.
+	aFunction argumentDo: [ :each |
+	    i := i + 1.
+	    variables at: each name put: (argsValue at: i) ]
     ]
 
     variableValue: aSymbol [

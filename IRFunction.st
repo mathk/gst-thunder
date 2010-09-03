@@ -34,11 +34,13 @@ Instruction subclass: IRFunction [
 
     function: aSymbol parameters: anArray return: aType [
 
+	| keywords |
         name := aSymbol.
-        args := Dictionary new.
+        args := OrderedCollection new.
         return := aType.
+	keywords := name keywords.
 	anArray do: [ :each |
-	    args at: each key put: (Variable named: each key type: each value) ]
+	    args addLast: (Variable named: each key type: each value) ]
     ]
 
     name [
@@ -51,7 +53,12 @@ Instruction subclass: IRFunction [
 	^ args
     ]
 
-    argumentsDo: aOneArgBlock [
+    argumentAt: anInteger [
+
+        ^ self arguments at: anInteger
+    ]
+
+    argumentDo: aOneArgBlock [
 
         ^ self arguments do: aOneArgBlock
     ]

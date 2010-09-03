@@ -28,6 +28,38 @@ TestCase subclass: InterpretTest [
 	self assert: (lf variableValue: #e) = 123 
     ]
 
+    testFunction [
+
+        | int lf th |
+        th := Thunder new.
+        th
+          function: #foo parameters: {#a->UInt. #b->UChar. #foo->UInt} return: UInt.
+
+        lf := IRInterpret on: th function with: #(1 2 3).
+
+        self assert: (lf variableValue: #a) = 1.
+        self assert: (lf variableValue: #b) = 2.
+        self assert: (lf variableValue: #foo) = 3.
+
+        th := Thunder new.
+        th
+          function: #foo parameters: {#a->UInt. #b->UChar. #foo->UInt} return: UInt;
+          variable: #a type: UInt;
+          variable: #b type: UInt;
+          variable: #c type: UInt;
+          variable: #d type: UInt;
+          variable: #e type: UInt.
+
+        lf := IRInterpret on: th function with: #(1 2 3).
+
+        self assert: (lf variableValue: #a) = nil.
+        self assert: (lf variableValue: #b) = nil.
+        self assert: (lf variableValue: #c) = nil.
+        self assert: (lf variableValue: #d) = nil.
+        self assert: (lf variableValue: #e) = nil.
+        self assert: (lf variableValue: #foo) = 3
+    ]
+
     testMemory [
 
         | int lf th |
