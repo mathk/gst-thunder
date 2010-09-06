@@ -41,39 +41,93 @@ IRVisitor subclass: CTranslator [
             i = keywords size ifFalse: [ stream nextPutAll: ', ' ] ].
 	stream 
 	    nextPutAll: ')';
+	    nl;
+	    nextPutAll: '{';
+	    nl.
+	super visitFunction: aFunction.
+	stream 
+	    nextPutAll: '}';
 	    nl
     ]
 
     visitVariableDeclaration: aVariable [
 
         stream
-            nextPutAll: aVariable name, ' ', aVariable type name;
+            nextPutAll: aVariable type cname, ' ', aVariable name, ';';
             nl
+    ]
+
+    visitInteger: anInteger [
+
+	stream nextPutAll: anInteger asString
+    ]
+
+    visitVariable: aVariable [
+
+	stream nextPutAll: aVariable
     ]
 
     visitMov: aMov [
 
-        aMov printOn: stream
+	stream
+	    nextPutAll: aMov destination;
+	    nextPutAll: ' = '.
+	aMov source accept: self.
+	stream
+	    nextPutAll: ';';
+	    nl
     ]
 
     visitAdd: anAdd [
 
-        anAdd printOn: stream
+        stream
+            nextPutAll: anAdd destination;
+            nextPutAll: ' = '.
+        anAdd source accept: self.
+        stream nextPutAll: ' + '.
+        anAdd param accept: self.
+        stream
+            nextPutAll: ';';
+            nl
     ]
 
     visitSub: aSub [
 
-        aSub printOn: stream
+        stream
+            nextPutAll: aSub destination;
+            nextPutAll: ' = '.
+        aSub source accept: self.
+        stream nextPutAll: ' - '.
+        aSub param accept: self.
+        stream
+            nextPutAll: ';';
+            nl
     ]
 
     visitMul: aMul [
 
-        aMul printOn: stream
+        stream
+            nextPutAll: aMul destination;
+            nextPutAll: ' = '.
+        aMul source accept: self.
+        stream nextPutAll: ' * '.
+        aMul param accept: self.
+        stream
+            nextPutAll: ';';
+            nl
     ]
 
     visitDiv: aDiv [
 
-        aDiv printOn: stream
+        stream
+            nextPutAll: aDiv destination;
+            nextPutAll: ' = '.
+        aDiv source accept: self.
+        stream nextPutAll: ' / '.
+        aDiv param accept: self.
+        stream
+            nextPutAll: ';';
+            nl
     ]
 
     visitMod: aMod [
