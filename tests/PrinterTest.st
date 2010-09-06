@@ -12,8 +12,8 @@ TestCase subclass: PrinterTest [
 
         string := (IRPrinter on: th function) stream contents.
         self assert: string =  'foo: nb UInt bar: size UChar
-b Int
 a UInt
+b Int
 '
     ]
 
@@ -29,8 +29,8 @@ a UInt
 
 	string := (IRPrinter on: th function) stream contents.
 	self assert: string =  'foo
-b Int
 a UInt
+b Int
 '
     ]
 
@@ -47,8 +47,8 @@ a UInt
 
         string := (IRPrinter on: th function) stream contents.
         self assert: string =  'foo
-b Int
 a UInt
+b Int
 mov #a to #b'
     ]
 
@@ -78,9 +78,9 @@ mov #a to #b'
 		inst := inst, (sym copyFrom: 1 to: sym size - 1) asString, ' ', (#(#a #b #c) at: i) displayString.
 		i = 3 ifFalse: [ inst := inst, ' ' ] ].
 	    self assert: string =  ('foo
-c Char
-b Int
 a UInt
+b Int
+c Char
 ', inst) ]
     ]
 
@@ -98,9 +98,9 @@ a UInt
 
         string := (IRPrinter on: th function) stream contents.
         self assert: string =  ('foo
-c Char
-b Int
 a UInt
+b Int
+c Char
 load UInt from #a to #c')
     ]
 
@@ -118,9 +118,9 @@ load UInt from #a to #c')
 
         string := (IRPrinter on: th function) stream contents.
         self assert: string =  ('foo
-c Char
-b Int
 a UInt
+b Int
+c Char
 store UInt value #a to #c')
     ]
 ]
